@@ -1,7 +1,5 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import com.sun.corba.se.impl.logging.ORBUtilSystemException;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -62,7 +60,7 @@ public class Game {
 				isGettingOutOfPenaltyBox = true;
 				
 				System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-				places[currentPlayer] = places[currentPlayer] + roll;
+                goToNextRolledPlace(roll);
                 resetPlaces();
 				
 				System.out.println(players.get(currentPlayer) 
@@ -76,8 +74,7 @@ public class Game {
 				}
 			
 		} else {
-		
-			places[currentPlayer] = places[currentPlayer] + roll;
+		    goToNextRolledPlace(roll);
             resetPlaces();
 			
 			System.out.println(players.get(currentPlayer) 
@@ -88,6 +85,10 @@ public class Game {
 		}
 		
 	}
+
+    private void goToNextRolledPlace(int roll) {
+        places[currentPlayer] = places[currentPlayer] + roll;
+    }
 
     private void resetPlaces() {
         if (places[currentPlayer] > 11) {
