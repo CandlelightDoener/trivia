@@ -1,5 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import com.sun.corba.se.impl.logging.ORBUtilSystemException;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -100,19 +102,26 @@ public class Game {
 	
 	
 	private String currentCategory() {
-		if (places[currentPlayer] == 0) return "Pop";
-		if (places[currentPlayer] == 4) return "Pop";
-		if (places[currentPlayer] == 8) return "Pop";
-		if (places[currentPlayer] == 1) return "Science";
-		if (places[currentPlayer] == 5) return "Science";
-		if (places[currentPlayer] == 9) return "Science";
-		if (places[currentPlayer] == 2) return "Sports";
-		if (places[currentPlayer] == 6) return "Sports";
-		if (places[currentPlayer] == 10) return "Sports";
-		return "Rock";
-	}
+        if(isPop(places[currentPlayer])) return "Pop";
+        if(isRock(places[currentPlayer])) return "Rock";
+        if(isScience(places[currentPlayer])) return "Science";
+        return "Sports";
+    }
 
-	public boolean wasCorrectlyAnswered() {
+    private boolean isScience(int place) {
+        return place == 1 || place == 5 || place == 9;
+    }
+
+    private boolean isPop(int place) {
+        return place == 0 || place == 4 || place == 8;
+    }
+
+    private boolean isRock(int place) {
+        return place == 3 || place == 7 || place == 11;
+    }
+
+
+    public boolean wasCorrectlyAnswered() {
 		if (inPenaltyBox[currentPlayer]){
 			if (isGettingOutOfPenaltyBox) {
 				System.out.println("Answer was correct!!!!");
