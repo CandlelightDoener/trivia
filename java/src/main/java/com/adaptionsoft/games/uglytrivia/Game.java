@@ -63,7 +63,7 @@ public class Game {
 				
 				System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
 				places[currentPlayer] = places[currentPlayer] + roll;
-				if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+                resetPlaces();
 				
 				System.out.println(players.get(currentPlayer) 
 						+ "'s new location is " 
@@ -78,7 +78,7 @@ public class Game {
 		} else {
 		
 			places[currentPlayer] = places[currentPlayer] + roll;
-			if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+            resetPlaces();
 			
 			System.out.println(players.get(currentPlayer) 
 					+ "'s new location is " 
@@ -89,7 +89,13 @@ public class Game {
 		
 	}
 
-	private void askQuestion() {
+    private void resetPlaces() {
+        if (places[currentPlayer] > 11) {
+            places[currentPlayer] = places[currentPlayer] - 12;
+        }
+    }
+
+    private void askQuestion() {
 		if (currentCategory() == "Pop")
 			System.out.println(popQuestions.removeFirst());
 		if (currentCategory() == "Science")
