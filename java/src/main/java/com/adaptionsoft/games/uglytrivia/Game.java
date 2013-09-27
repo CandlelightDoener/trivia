@@ -1,6 +1,5 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
@@ -8,8 +7,9 @@ public class Game {
     public static final int NO_OF_QUESTIONS_FOR_EACH_CATEGORY = 50;
     public static final int MAX_PLACES = 12;
     public static final int COINS_TO_WIN = 6;
+    
+    final Players players = new Players();
 
-    ArrayList<Player> players = new ArrayList<Player>();
     int[] places = new int[MAX_PLAYERS];
 
     LinkedList<String> popQuestions = new LinkedList<String>();
@@ -30,7 +30,7 @@ public class Game {
     }
 
     public void add(String playerName) {
-        players.add(new Player(playerName, players.size() + 1)); //TODO fix that +1 later
+        players.add(new Player(playerName)); //TODO fix that +1 later
     }
 
     public void roll(int diceEyes) {

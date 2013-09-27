@@ -5,11 +5,8 @@ public class Player {
     private boolean inPenaltyBox;
     private int coins;
 
-    public Player(String playerName, int orderOfAppearance) {
+    public Player(String playerName) {
         this.playerName = playerName;
-
-        System.out.println(playerName + " was added");
-        System.out.println("They are player number " + orderOfAppearance);
     }
 
     @Override
