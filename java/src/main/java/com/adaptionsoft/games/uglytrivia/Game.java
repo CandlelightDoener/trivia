@@ -11,7 +11,6 @@ public class Game {
 
     ArrayList<Player> players = new ArrayList<Player>();
     int[] places = new int[MAX_PLAYERS];
-    int[] purses = new int[MAX_PLAYERS];
 
     LinkedList<String> popQuestions = new LinkedList<String>();
     LinkedList<String> scienceQuestions = new LinkedList<String>();
@@ -127,15 +126,15 @@ public class Game {
 
     private void givePlayerMoney() {
         System.out.println("Answer was correct!!!!");
-        purses[currentPlayer]++;
+        players.get(currentPlayer).addCoin();
         System.out.println(players.get(currentPlayer)
                 + " now has "
-                + purses[currentPlayer]
+                + players.get(currentPlayer).getCoins()
                 + " Gold Coins.");
     }
 
 
     private boolean playerHasNotEnoughCoinsYet() {
-        return purses[currentPlayer] != COINS_TO_WIN;
+        return players.get(currentPlayer).getCoins() != COINS_TO_WIN;
     }
 }
