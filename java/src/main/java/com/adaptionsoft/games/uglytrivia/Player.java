@@ -19,7 +19,7 @@ public class Player {
     }
 
     public void sendToPenaltyBox() {
-        inPenaltyBox = true; //TODO: exposed bug -> a player apparently never gets out of the penalty box
+        inPenaltyBox = true;
     }
 
     public void addCoin() {
@@ -33,7 +33,7 @@ public class Player {
     public void removeFromPenaltyBox(boolean shouldBeRemoved) {
         String maybe = "";
         if(shouldBeRemoved) {
-            //inPenaltyBox = false;
+            inPenaltyBox = false;
         } else {
             maybe = "not ";
         }
