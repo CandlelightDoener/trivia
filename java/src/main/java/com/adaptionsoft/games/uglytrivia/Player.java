@@ -6,7 +6,7 @@ public class Player {
     private final String playerName;
     private boolean inPenaltyBox;
     private int coins;
-    private int places;
+    private int locationOnPlayingField;
 
     public Player(String playerName) {
         this.playerName = playerName;
@@ -20,7 +20,7 @@ public class Player {
         inPenaltyBox = true;
     }
 
-    public void addCoin() {
+    public void pay() {
         coins++;
     }
 
@@ -40,25 +40,13 @@ public class Player {
     }
 
     public void moveBy(int diceEyes) {
-        places += diceEyes;
-        places %= MAX_PLACES;
+        locationOnPlayingField += diceEyes;
+        locationOnPlayingField %= MAX_PLACES;
     }
 
-    public int getLocation() {
-        return places;
+    public int getLocationOnPlayingField() {
+        return locationOnPlayingField;
     }
-
-    public String getCategory() {
-        if (places == 0) return "Pop";
-        if (places == 4) return "Pop";
-        if (places == 8) return "Pop";
-        if (places == 1) return "Science";
-        if (places == 5) return "Science";
-        if (places == 9) return "Science";
-        if (places == 2) return "Sports";
-        if (places == 6) return "Sports";
-        if (places == 10) return "Sports";
-        return "Rock";    }
 
     public String getName() {
         return playerName;

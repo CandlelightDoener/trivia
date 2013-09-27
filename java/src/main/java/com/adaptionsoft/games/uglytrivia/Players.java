@@ -52,19 +52,19 @@ public class Players {
         System.out.println(getCurrentPlayerName()
                 + "'s new location is "
                 + getCurrentPlayerLocation());
-        System.out.println("The category is " + getCurrentPlayerCategory());
+        System.out.println("The category is " + Category.getCategoryName(getCurrentPlayerLocation()));
     }
 
     public int getCurrentPlayerLocation() {
-        return players.get(currentPlayer).getLocation();
+        return players.get(currentPlayer).getLocationOnPlayingField();
     }
 
     public String getCurrentPlayerCategory() {
-        return players.get(currentPlayer).getCategory();
+        return Category.getCategoryName(getCurrentPlayerLocation());
     }
 
     public void payCurrentPlayer() {
-        players.get(currentPlayer).addCoin();
+        players.get(currentPlayer).pay();
 
         System.out.println(getCurrentPlayerName()
                 + " now has " + getCurrentPlayerCoins()
