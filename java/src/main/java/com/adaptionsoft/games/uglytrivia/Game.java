@@ -30,7 +30,7 @@ public class Game {
         System.out.println(players.getCurrentPlayer() + " is the current player");
         System.out.println("They have rolled a " + diceEyes);
 
-        if (isCorrentPlayerInPenaltyBox()) {
+        if (isCurrentPlayerInPenaltyBox()) {
             if (diceEyes % 2 != 0) {
                 players.getCurrentPlayer().removeFromPenaltyBox(true);
                 move(diceEyes);
@@ -44,11 +44,11 @@ public class Game {
         }
     }
 
-    private boolean isCorrentPlayerInPenaltyBox() {
+    private boolean isCurrentPlayerInPenaltyBox() {
         return players.getCurrentPlayer().isInPenaltyBox();
     }
 
-    private void sendCorrentPlayerToPenaltyBox() {
+    private void sendCurrentPlayerToPenaltyBox() {
         players.getCurrentPlayer().sendToPenaltyBox();
     }
 
@@ -80,7 +80,7 @@ public class Game {
     public void proceedWhenWrongAnswer() {
         System.out.println("Question was incorrectly answered");
         System.out.println(players.getCurrentPlayer() + " was sent to the penalty box");
-        sendCorrentPlayerToPenaltyBox();
+        sendCurrentPlayerToPenaltyBox();
 
         players.switchToNextPlayer();
     }
@@ -88,7 +88,7 @@ public class Game {
     public boolean proceedWhenCorrectlyAnswered_andDetermineIfWeShouldKeepOnPlaying() {
         boolean keepOnPlaying = true;
 
-        if (isCorrentPlayerInPenaltyBox()) {
+        if (isCurrentPlayerInPenaltyBox()) {
             players.switchToNextPlayer();
         } else {
             givePlayerMoney();
