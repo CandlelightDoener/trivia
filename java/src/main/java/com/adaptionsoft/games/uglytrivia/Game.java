@@ -29,16 +29,16 @@ public class Game {
     }
 
     public void roll(int diceEyes) {
-        System.out.println(getCurrentPlayer() + " is the current player");
+        System.out.println(getCorrentPlayer() + " is the current player");
         System.out.println("They have rolled a " + diceEyes);
 
-        if (isCurrentPlayerInPenaltyBox()) {
+        if (isCorrentPlayerInPenaltyBox()) {
             if (diceEyes % 2 != 0) {
-                getCurrentPlayer().removeFromPenaltyBox(true);
+                getCorrentPlayer().removeFromPenaltyBox(true);
                 move(diceEyes);
                 askQuestion();
             } else {
-                getCurrentPlayer().removeFromPenaltyBox(false);
+                getCorrentPlayer().removeFromPenaltyBox(false);
             }
         } else {
             move(diceEyes);
@@ -46,24 +46,24 @@ public class Game {
         }
     }
 
-    private boolean isCurrentPlayerInPenaltyBox() {
-        return getCurrentPlayer().isInPenaltyBox();
+    private boolean isCorrentPlayerInPenaltyBox() {
+        return getCorrentPlayer().isInPenaltyBox();
     }
 
-    private Player getCurrentPlayer() {
+    private Player getCorrentPlayer() {
         return players.get(currentPlayer);
     }
 
-    private void sendCurrentPlayerToPenaltyBox() {
-        getCurrentPlayer().sendToPenaltyBox();
+    private void sendCorrentPlayerToPenaltyBox() {
+        getCorrentPlayer().sendToPenaltyBox();
     }
 
     private void move(int diceEyes) {
-        getCurrentPlayer().moveBy(diceEyes);
+        getCorrentPlayer().moveBy(diceEyes);
 
-        System.out.println(getCurrentPlayer()
+        System.out.println(getCorrentPlayer()
                 + "'s new location is "
-                + getCurrentPlayer().getLocation());
+                + getCorrentPlayer().getLocation());
         System.out.println("The category is " + currentCategory());
     }
 
@@ -80,13 +80,13 @@ public class Game {
     }
 
     private String currentCategory() {
-        return getCurrentPlayer().getCategory();
+        return getCorrentPlayer().getCategory();
     }
 
     public void proceedWhenWrongAnswer() {
         System.out.println("Question was incorrectly answered");
-        System.out.println(getCurrentPlayer() + " was sent to the penalty box");
-        sendCurrentPlayerToPenaltyBox();
+        System.out.println(getCorrentPlayer() + " was sent to the penalty box");
+        sendCorrentPlayerToPenaltyBox();
 
         switchToNextPlayer();
     }
@@ -94,7 +94,7 @@ public class Game {
     public boolean proceedWhenCorrectlyAnswered_andDetermineIfWeShouldKeepOnPlaying() {
         boolean keepOnPlaying = true;
 
-        if (isCurrentPlayerInPenaltyBox()) {
+        if (isCorrentPlayerInPenaltyBox()) {
             switchToNextPlayer();
         } else {
             givePlayerMoney();
@@ -112,15 +112,15 @@ public class Game {
 
     private void givePlayerMoney() {
         System.out.println("Answer was correct!!!!");
-        getCurrentPlayer().addCoin();
-        System.out.println(getCurrentPlayer()
+        getCorrentPlayer().addCoin();
+        System.out.println(getCorrentPlayer()
                 + " now has "
-                + getCurrentPlayer().getCoins()
+                + getCorrentPlayer().getCoins()
                 + " Gold Coins.");
     }
 
 
     private boolean playerHasNotEnoughCoinsYet() {
-        return getCurrentPlayer().getCoins() != COINS_TO_WIN;
+        return getCorrentPlayer().getCoins() != COINS_TO_WIN;
     }
 }
