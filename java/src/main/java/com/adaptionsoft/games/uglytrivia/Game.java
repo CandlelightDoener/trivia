@@ -3,23 +3,9 @@ package com.adaptionsoft.games.uglytrivia;
 import java.util.LinkedList;
 
 public class Game {
-    public static final int NO_OF_QUESTIONS_FOR_EACH_CATEGORY = 50;
 
     final Players players = new Players();
-
-    LinkedList<String> popQuestions = new LinkedList<String>();
-    LinkedList<String> scienceQuestions = new LinkedList<String>();
-    LinkedList<String> sportsQuestions = new LinkedList<String>();
-    LinkedList<String> rockQuestions = new LinkedList<String>();
-
-    public Game() {
-        for (int i = 0; i < NO_OF_QUESTIONS_FOR_EACH_CATEGORY; i++) {
-            popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast(("Science Question " + i));
-            sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast("Rock Question " + i);
-        }
-    }
+    final Questions questions = new Questions();
 
     public void add(String playerName) {
         players.add(new Player(playerName));
@@ -44,14 +30,7 @@ public class Game {
     }
 
     private void askQuestion() {
-        if (players.getCurrentPlayerCategory().equals("Pop"))
-            System.out.println(popQuestions.removeFirst());
-        if (players.getCurrentPlayerCategory().equals("Science"))
-            System.out.println(scienceQuestions.removeFirst());
-        if (players.getCurrentPlayerCategory().equals("Sports"))
-            System.out.println(sportsQuestions.removeFirst());
-        if (players.getCurrentPlayerCategory().equals("Rock"))
-            System.out.println(rockQuestions.removeFirst());
+        questions.ask(players.getCurrentPlayerCategory());
     }
 
     public void proceedWhenWrongAnswer() {
