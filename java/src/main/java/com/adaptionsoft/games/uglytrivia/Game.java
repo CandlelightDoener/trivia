@@ -7,6 +7,7 @@ public class Game {
     public static final int MAX_PLAYERS = 6;
     public static final int NO_OF_QUESTIONS_FOR_EACH_CATEGORY = 50;
     public static final int MAX_PLACES = 12;
+    public static final int COINS_TO_WIN = 6;
 
     ArrayList<String> players = new ArrayList<String>();
     int[] places = new int[MAX_PLAYERS];
@@ -94,15 +95,24 @@ public class Game {
         return "Rock";
     }
 
-    public boolean wasCorrectlyAnswered() {
+    public boolean proceedWhenWrongAnswer() {
+        System.out.println("Question was incorrectly answered");
+        System.out.println(players.get(currentPlayer) + " was sent to the penalty box");
+        inPenaltyBox[currentPlayer] = true;
+
+        switchToNextPlayer();
+        return true;
+    }
+
+    public boolean proceedWhenCorrectlyAnswered_andDetermineIfWeShouldKeepOnPlaying() {
         if (inPenaltyBox[currentPlayer]) {
             if (isGettingOutOfPenaltyBox) {
                 givePlayerMoney();
 
-                boolean winner = didPlayerWin();
+                boolean keepOnPlaying = playerHasNotYetWon();
                 switchToNextPlayer();
 
-                return winner;
+                return keepOnPlaying;
             } else {
                 switchToNextPlayer();
                 return true;
@@ -110,7 +120,7 @@ public class Game {
         } else {
             givePlayerMoney();
 
-            boolean winner = didPlayerWin();
+            boolean winner = playerHasNotYetWon();
             switchToNextPlayer();
 
             return winner;
@@ -131,17 +141,8 @@ public class Game {
                 + " Gold Coins.");
     }
 
-    public boolean wrongAnswer() {
-        System.out.println("Question was incorrectly answered");
-        System.out.println(players.get(currentPlayer) + " was sent to the penalty box");
-        inPenaltyBox[currentPlayer] = true;
 
-        switchToNextPlayer();
-        return true;
-    }
-
-
-    private boolean didPlayerWin() {
-        return !(purses[currentPlayer] == 6);
+    private boolean playerHasNotYetWon() {
+        return purses[currentPlayer] != COINS_TO_WIN;
     }
 }
