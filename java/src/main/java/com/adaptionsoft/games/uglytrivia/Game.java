@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
+    public static final int MAX_PLAYERS = 6;
+    public static final int NO_OF_QUESTIONS_FOR_EACH_CATEGORY = 50;
+    public static final int MAX_PLACES = 12;
+
     ArrayList<String> players = new ArrayList<String>();
-    int[] places = new int[6];
-    int[] purses = new int[6];
-    boolean[] inPenaltyBox = new boolean[6];
+    int[] places = new int[MAX_PLAYERS];
+    int[] purses = new int[MAX_PLAYERS];
+    boolean[] inPenaltyBox = new boolean[MAX_PLAYERS];
 
     LinkedList<String> popQuestions = new LinkedList<String>();
     LinkedList<String> scienceQuestions = new LinkedList<String>();
@@ -18,7 +22,7 @@ public class Game {
     boolean isGettingOutOfPenaltyBox;
 
     public Game() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < NO_OF_QUESTIONS_FOR_EACH_CATEGORY; i++) {
             popQuestions.addLast("Pop Question " + i);
             scienceQuestions.addLast(("Science Question " + i));
             sportsQuestions.addLast(("Sports Question " + i));
@@ -55,7 +59,7 @@ public class Game {
 
                 System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
                 places[currentPlayer] = places[currentPlayer] + roll;
-                if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+                if (places[currentPlayer] >= MAX_PLACES) places[currentPlayer] = places[currentPlayer] - MAX_PLACES;
 
                 System.out.println(players.get(currentPlayer)
                         + "'s new location is "
@@ -70,7 +74,7 @@ public class Game {
         } else {
 
             places[currentPlayer] = places[currentPlayer] + roll;
-            if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+            if (places[currentPlayer] >= MAX_PLACES) places[currentPlayer] = places[currentPlayer] - MAX_PLACES;
 
             System.out.println(players.get(currentPlayer)
                     + "'s new location is "
