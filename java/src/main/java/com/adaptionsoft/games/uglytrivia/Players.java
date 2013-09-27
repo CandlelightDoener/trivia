@@ -3,6 +3,7 @@ package com.adaptionsoft.games.uglytrivia;
 import java.util.ArrayList;
 
 public class Players {
+    public static final int COINS_TO_WIN = 6;
     private static final int MAX_PLAYERS = 6;
 
     private int currentPlayer;
@@ -41,10 +42,17 @@ public class Players {
 
     public void sendCurrentPlayerToPenaltyBox() {
         players.get(currentPlayer).sendToPenaltyBox();
+
+        System.out.println(getCurrentPlayerName() + " was sent to the penalty box");
     }
 
     public void moveCurrentPlayerBy(int diceEyes) {
         players.get(currentPlayer).moveBy(diceEyes);
+
+        System.out.println(getCurrentPlayerName()
+                + "'s new location is "
+                + getCurrentPlayerLocation());
+        System.out.println("The category is " + getCurrentPlayerCategory());
     }
 
     public int getCurrentPlayerLocation() {
@@ -57,9 +65,17 @@ public class Players {
 
     public void payCurrentPlayer() {
         players.get(currentPlayer).addCoin();
+
+        System.out.println(getCurrentPlayerName()
+                + " now has " + getCurrentPlayerCoins()
+                + " Gold Coins.");
     }
 
     public int getCurrentPlayerCoins() {
         return players.get(currentPlayer).getCoins();
+    }
+
+    boolean playerHasNotEnoughCoinsYet() {
+        return getCurrentPlayerCoins() != COINS_TO_WIN;
     }
 }

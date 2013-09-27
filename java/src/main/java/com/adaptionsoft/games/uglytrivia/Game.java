@@ -4,8 +4,7 @@ import java.util.LinkedList;
 
 public class Game {
     public static final int NO_OF_QUESTIONS_FOR_EACH_CATEGORY = 50;
-    public static final int COINS_TO_WIN = 6;
-    
+
     final Players players = new Players();
 
     LinkedList<String> popQuestions = new LinkedList<String>();
@@ -30,69 +29,46 @@ public class Game {
         System.out.println(players.getCurrentPlayerName() + " is the current player");
         System.out.println("They have rolled a " + diceEyes);
 
-        if (isCurrentPlayerInPenaltyBox()) {
+        if (players.isCurrentPlayerInPenaltyBox()) {
             if (diceEyes % 2 != 0) {
                 players.removeCurrentPlayerFromPenaltyBox(true);
-                move(diceEyes);
+                players.moveCurrentPlayerBy(diceEyes);
                 askQuestion();
             } else {
                 players.removeCurrentPlayerFromPenaltyBox(false);
             }
         } else {
-            move(diceEyes);
+            players.moveCurrentPlayerBy(diceEyes);
             askQuestion();
         }
     }
 
-    private boolean isCurrentPlayerInPenaltyBox() {
-        return players.isCurrentPlayerInPenaltyBox();
-    }
-
-    private void sendCurrentPlayerToPenaltyBox() {
-        players.sendCurrentPlayerToPenaltyBox();
-    }
-
-    private void move(int diceEyes) {
-        players.moveCurrentPlayerBy(diceEyes);
-
-        System.out.println(players.getCurrentPlayerName()
-                + "'s new location is "
-                + players.getCurrentPlayerLocation());
-        System.out.println("The category is " + currentCategory());
-    }
-
-
     private void askQuestion() {
-        if (currentCategory().equals("Pop"))
+        if (players.getCurrentPlayerCategory().equals("Pop"))
             System.out.println(popQuestions.removeFirst());
-        if (currentCategory().equals("Science"))
+        if (players.getCurrentPlayerCategory().equals("Science"))
             System.out.println(scienceQuestions.removeFirst());
-        if (currentCategory().equals("Sports"))
+        if (players.getCurrentPlayerCategory().equals("Sports"))
             System.out.println(sportsQuestions.removeFirst());
-        if (currentCategory().equals("Rock"))
+        if (players.getCurrentPlayerCategory().equals("Rock"))
             System.out.println(rockQuestions.removeFirst());
-    }
-
-    private String currentCategory() {
-        return players.getCurrentPlayerCategory();
     }
 
     public void proceedWhenWrongAnswer() {
         System.out.println("Question was incorrectly answered");
-        System.out.println(players.getCurrentPlayerName() + " was sent to the penalty box");
-        sendCurrentPlayerToPenaltyBox();
 
+        players.sendCurrentPlayerToPenaltyBox();
         players.switchToNextPlayer();
     }
 
     public boolean proceedWhenCorrectlyAnswered_andDetermineIfWeShouldKeepOnPlaying() {
         boolean keepOnPlaying = true;
 
-        if (isCurrentPlayerInPenaltyBox()) {
+        if (players.isCurrentPlayerInPenaltyBox()) {
             players.switchToNextPlayer();
         } else {
             givePlayerMoney();
-            keepOnPlaying = playerHasNotEnoughCoinsYet();
+            keepOnPlaying = players.playerHasNotEnoughCoinsYet();
             players.switchToNextPlayer();
         }
 
@@ -102,13 +78,5 @@ public class Game {
     private void givePlayerMoney() {
         System.out.println("Answer was correct!!!!");
         players.payCurrentPlayer();
-        System.out.println(players.getCurrentPlayerName()
-                + " now has " + players.getCurrentPlayerCoins()
-                + " Gold Coins.");
-    }
-
-
-    private boolean playerHasNotEnoughCoinsYet() {
-        return players.getCurrentPlayerCoins() != COINS_TO_WIN;
     }
 }
