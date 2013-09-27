@@ -22,26 +22,10 @@ public class Players {
         System.out.println("They are player number " + players.size());
     }
 
-    @Deprecated
-    public Player get(int currentPlayer) {
-        return players.get(currentPlayer);
-    }
-
-    @Deprecated
-    public int size() {
-        return players.size();
-    }
-
     public void switchToNextPlayer() {
         currentPlayer ++;
         currentPlayer %= players.size();
     }
-
-    @Deprecated
-    public Player getCurrentPlayer() {
-        return players.get(currentPlayer);
-    }
-
 
     public String getCurrentPlayerName() {
         return players.get(currentPlayer).getName();
