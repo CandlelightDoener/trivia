@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Players {
     private static final int MAX_PLAYERS = 6;
 
+    private int currentPlayer;
+
     ArrayList<Player> players = new ArrayList<Player>();
 
     public Players() {
@@ -26,5 +28,14 @@ public class Players {
 
     public int size() {
         return players.size();
+    }
+
+    public void switchToNextPlayer() {
+        currentPlayer ++;
+        currentPlayer %= players.size();
+    }
+
+    public Player getCurrentPlayer() {
+        return players.get(currentPlayer);
     }
 }
