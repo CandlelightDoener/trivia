@@ -29,7 +29,7 @@ public class Game {
     }
 
     public void add(String playerName) {
-        players.add(new Player(playerName)); //TODO fix that +1 later
+        players.add(new Player(playerName));
     }
 
     public void roll(int diceEyes) {
