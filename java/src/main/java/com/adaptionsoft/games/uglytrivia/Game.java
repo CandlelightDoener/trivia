@@ -43,14 +43,12 @@ public class Game {
 
         boolean keepOnPlaying = true;
 
-        if (players.isCurrentPlayerInPenaltyBox()) {
-            players.switchToNextPlayer();
-        } else {
+        if (! players.isCurrentPlayerInPenaltyBox()) {
             players.payCurrentPlayer();
             keepOnPlaying = players.playerHasNotEnoughCoinsYet();
-            players.switchToNextPlayer();
         }
 
+        players.switchToNextPlayer();
         return keepOnPlaying;
     }
 
