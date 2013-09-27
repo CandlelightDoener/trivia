@@ -3,7 +3,6 @@ package com.adaptionsoft.games.uglytrivia;
 import java.util.LinkedList;
 
 public class Game {
-    public static final int MAX_PLAYERS = 6;
     public static final int NO_OF_QUESTIONS_FOR_EACH_CATEGORY = 50;
     public static final int COINS_TO_WIN = 6;
     
