@@ -39,13 +39,12 @@ public class Game {
 
         if (isCurrentPlayerInPenaltyBox()) {
             if (diceEyes % 2 != 0) {
+                players.get(currentPlayer).removeFromPenaltyBox(true);
                 isGettingOutOfPenaltyBox = true;
-
-                System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
                 move(diceEyes);
                 askQuestion();
             } else {
-                System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
+                players.get(currentPlayer).removeFromPenaltyBox(false);
                 isGettingOutOfPenaltyBox = false;
             }
         } else {

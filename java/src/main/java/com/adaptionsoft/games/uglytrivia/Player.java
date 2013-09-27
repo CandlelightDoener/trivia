@@ -29,4 +29,15 @@ public class Player {
     public int getCoins() {
         return coins;
     }
+
+    public void removeFromPenaltyBox(boolean shouldBeRemoved) {
+        String maybe = "";
+        if(shouldBeRemoved) {
+            //inPenaltyBox = false;
+        } else {
+            maybe = "not ";
+        }
+
+        System.out.println(playerName + " is " + maybe + "getting out of the penalty box");
+    }
 }
