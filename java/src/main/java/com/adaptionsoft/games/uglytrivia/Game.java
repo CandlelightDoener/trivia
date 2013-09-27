@@ -13,18 +13,21 @@ public class Game {
         System.out.println(players.getCurrentPlayerName() + " is the current player");
         System.out.println("They have rolled a " + diceEyes);
 
-        if (players.isCurrentPlayerInPenaltyBox()) {
-            if (diceEyes % 2 != 0) {
-                players.removeCurrentPlayerFromPenaltyBox(true);
-                players.moveCurrentPlayerBy(diceEyes);
-                askQuestion();
-            } else {
-                players.removeCurrentPlayerFromPenaltyBox(false);
-            }
-        } else {
-            players.moveCurrentPlayerBy(diceEyes);
-            askQuestion();
+        if (players.isCurrentPlayerInPenaltyBox() && isEven(diceEyes)) {
+            players.removeCurrentPlayerFromPenaltyBox(false);
+            return;
         }
+
+        if (players.isCurrentPlayerInPenaltyBox()) {
+            players.removeCurrentPlayerFromPenaltyBox(true);
+        }
+
+        players.moveCurrentPlayerBy(diceEyes);
+        askQuestion();
+    }
+
+    private boolean isEven(int diceEyes) {
+        return diceEyes % 2 == 0;
     }
 
     private void askQuestion() {
@@ -43,7 +46,7 @@ public class Game {
 
         boolean keepOnPlaying = true;
 
-        if (! players.isCurrentPlayerInPenaltyBox()) {
+        if (!players.isCurrentPlayerInPenaltyBox()) {
             players.payCurrentPlayer();
             keepOnPlaying = players.playerHasNotEnoughCoinsYet();
         }
