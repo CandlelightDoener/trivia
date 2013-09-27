@@ -5,6 +5,8 @@ package com.adaptionsoft.games.uglytrivia;
  * + all these calls to Player in Players. This happened when removing trainwrecks in the Game class.
  * + the flow in roll(int)
  * + proceedWhenCorrectlyAnswered_andDetermineIfWeShouldKeepOnPlaying
+ *   - that it returns a boolean
+ *   - that it does two things
  * + Where does MAX_PLACES belong: really into player? Shouldn't it be part of some "board" or sth.?
  */
 public class Game {

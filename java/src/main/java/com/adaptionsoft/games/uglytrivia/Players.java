@@ -10,7 +10,7 @@ public class Players {
     private int currentPlayer;
 
     public void add(Player player) {
-        if(players.size() >= MAX_PLAYERS)
+        if (players.size() >= MAX_PLAYERS)
             throw new RuntimeException("Can't add player - maximum number of players already reached");
 
         players.add(player);
@@ -20,7 +20,7 @@ public class Players {
     }
 
     public void switchToNextPlayer() {
-        currentPlayer ++;
+        currentPlayer++;
         currentPlayer %= players.size();
     }
 
@@ -29,7 +29,10 @@ public class Players {
     }
 
     public void removeCurrentPlayerFromPenaltyBox(boolean shouldBeRemoved) {
-        players.get(currentPlayer).removeFromPenaltyBox(shouldBeRemoved);
+        if (shouldBeRemoved)
+            players.get(currentPlayer).removeFromPenaltyBox();
+
+        System.out.println(getCurrentPlayerName() + " is " + (shouldBeRemoved ? "" : "not ") + "getting out of the penalty box");
     }
 
     public boolean isCurrentPlayerInPenaltyBox() {

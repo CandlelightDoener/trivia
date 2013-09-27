@@ -12,12 +12,20 @@ public class Player {
         this.playerName = playerName;
     }
 
-    public boolean isInPenaltyBox() {
-        return inPenaltyBox;
+    public String getName() {
+        return playerName;
     }
 
     public void sendToPenaltyBox() {
         inPenaltyBox = true;
+    }
+
+    public void removeFromPenaltyBox() {
+        inPenaltyBox = false;
+    }
+
+    public boolean isInPenaltyBox() {
+        return inPenaltyBox;
     }
 
     public void pay() {
@@ -28,17 +36,6 @@ public class Player {
         return coins;
     }
 
-    public void removeFromPenaltyBox(boolean shouldBeRemoved) {
-        String maybe = "";
-        if(shouldBeRemoved) {
-            inPenaltyBox = false;
-        } else {
-            maybe = "not ";
-        }
-
-        System.out.println(playerName + " is " + maybe + "getting out of the penalty box");
-    }
-
     public void moveBy(int diceEyes) {
         locationOnPlayingField += diceEyes;
         locationOnPlayingField %= MAX_PLACES;
@@ -46,9 +43,5 @@ public class Player {
 
     public int getLocationOnPlayingField() {
         return locationOnPlayingField;
-    }
-
-    public String getName() {
-        return playerName;
     }
 }
