@@ -52,15 +52,15 @@ public class Players {
         System.out.println(getCurrentPlayerName()
                 + "'s new location is "
                 + getCurrentPlayerLocation());
-        System.out.println("The category is " + Category.getCategoryName(getCurrentPlayerLocation()));
+        System.out.println("The category is " + Category.getCategory(getCurrentPlayerLocation()).getCategoryName());
     }
 
     public int getCurrentPlayerLocation() {
         return players.get(currentPlayer).getLocationOnPlayingField();
     }
 
-    public String getCurrentPlayerCategory() {
-        return Category.getCategoryName(getCurrentPlayerLocation());
+    public Category getCurrentPlayerCategory() {
+        return Category.getCategory(getCurrentPlayerLocation());
     }
 
     public void payCurrentPlayer() {

@@ -1,34 +1,36 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Questions {
 
-    public static final int NO_OF_QUESTIONS_FOR_EACH_CATEGORY = 50;
-    
-    private LinkedList<String> popQuestions = new LinkedList<String>();
-    private LinkedList<String> scienceQuestions = new LinkedList<String>();
-    private LinkedList<String> sportsQuestions = new LinkedList<String>();
-    private LinkedList<String> rockQuestions = new LinkedList<String>();
+    private Map<Category, Counter> questions = new HashMap<Category, Counter>();
 
     public Questions() {
-        for (int i = 0; i < NO_OF_QUESTIONS_FOR_EACH_CATEGORY; i++) {
-            popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast(("Science Question " + i));
-            sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast("Rock Question " + i);
+        for (Category category : Category.values()) {
+            questions.put(category, new Counter());
         }
     }
 
+    public void ask(Category currentPlayerCategory) {
+        Counter counter = questions.get(currentPlayerCategory);
 
-    public void ask(String currentPlayerCategory) {
-        if (currentPlayerCategory.equals("Pop"))
-            System.out.println(popQuestions.removeFirst());
-        if (currentPlayerCategory.equals("Science"))
-            System.out.println(scienceQuestions.removeFirst());
-        if (currentPlayerCategory.equals("Sports"))
-            System.out.println(sportsQuestions.removeFirst());
-        if (currentPlayerCategory.equals("Rock"))
-            System.out.println(rockQuestions.removeFirst());
+        System.out.println(currentPlayerCategory.getCategoryName() + " Question " + counter.value);
+
+        counter.raise();
+    }
+
+    private class Counter {
+        private static final int NO_OF_QUESTIONS_FOR_EACH_CATEGORY = 50;
+
+        int value = 0;
+
+        void raise() {
+            if (value >= NO_OF_QUESTIONS_FOR_EACH_CATEGORY) {
+                throw new RuntimeException("Deck is depleted");
+            }
+            value++;
+        }
     }
 }

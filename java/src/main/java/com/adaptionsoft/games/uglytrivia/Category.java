@@ -16,8 +16,8 @@ public enum Category {
         return categoryName;
     }
 
-    public static String getCategoryName(int field) {
+    public static Category getCategory(int field) {
         int noOfCategories = Category.values().length;
-        return Category.values()[field % noOfCategories].getCategoryName();
+        return Category.values()[field % noOfCategories];
     }
 }
