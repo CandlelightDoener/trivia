@@ -104,26 +104,17 @@ public class Game {
     }
 
     public boolean proceedWhenCorrectlyAnswered_andDetermineIfWeShouldKeepOnPlaying() {
-        if (inPenaltyBox[currentPlayer]) {
-            if (isGettingOutOfPenaltyBox) {
-                givePlayerMoney();
+        boolean keepOnPlaying = true;
 
-                boolean keepOnPlaying = playerHasNotYetWon();
-                switchToNextPlayer();
-
-                return keepOnPlaying;
-            } else {
-                switchToNextPlayer();
-                return true;
-            }
+        if (inPenaltyBox[currentPlayer] && !isGettingOutOfPenaltyBox) {
+            switchToNextPlayer();
         } else {
             givePlayerMoney();
-
-            boolean winner = playerHasNotYetWon();
+            keepOnPlaying = playerHasNotEnoughCoinsYet();
             switchToNextPlayer();
-
-            return winner;
         }
+
+        return keepOnPlaying;
     }
 
     private void switchToNextPlayer() {
@@ -141,7 +132,7 @@ public class Game {
     }
 
 
-    private boolean playerHasNotYetWon() {
+    private boolean playerHasNotEnoughCoinsYet() {
         return purses[currentPlayer] != COINS_TO_WIN;
     }
 }
