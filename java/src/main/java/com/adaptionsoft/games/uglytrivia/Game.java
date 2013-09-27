@@ -12,7 +12,6 @@ public class Game {
     ArrayList<Player> players = new ArrayList<Player>();
     int[] places = new int[MAX_PLAYERS];
     int[] purses = new int[MAX_PLAYERS];
-    boolean[] inPenaltyBox = new boolean[MAX_PLAYERS];
 
     LinkedList<String> popQuestions = new LinkedList<String>();
     LinkedList<String> scienceQuestions = new LinkedList<String>();
@@ -39,7 +38,7 @@ public class Game {
         System.out.println(players.get(currentPlayer) + " is the current player");
         System.out.println("They have rolled a " + diceEyes);
 
-        if (inPenaltyBox[currentPlayer]) {
+        if (isCurrentPlayerInPenaltyBox()) {
             if (diceEyes % 2 != 0) {
                 isGettingOutOfPenaltyBox = true;
 
@@ -56,6 +55,14 @@ public class Game {
         }
     }
 
+    private boolean isCurrentPlayerInPenaltyBox() {
+        return players.get(currentPlayer).isInPenaltyBox();
+    }
+
+    private void sendCurrentPlayerToPenaltyBox() {
+        players.get(currentPlayer).sendToPenaltyBox();
+    }
+
     private void move(int diceEyes) {
         places[currentPlayer] += diceEyes;
         places[currentPlayer] %= MAX_PLACES;
@@ -65,6 +72,7 @@ public class Game {
                 + places[currentPlayer]);
         System.out.println("The category is " + currentCategory());
     }
+
 
     private void askQuestion() {
         if (currentCategory().equals("Pop"))
@@ -76,7 +84,6 @@ public class Game {
         if (currentCategory().equals("Rock"))
             System.out.println(rockQuestions.removeFirst());
     }
-
 
     private String currentCategory() {
         if (places[currentPlayer] == 0) return "Pop";
@@ -94,7 +101,7 @@ public class Game {
     public void proceedWhenWrongAnswer() {
         System.out.println("Question was incorrectly answered");
         System.out.println(players.get(currentPlayer) + " was sent to the penalty box");
-        inPenaltyBox[currentPlayer] = true;
+        sendCurrentPlayerToPenaltyBox();
 
         switchToNextPlayer();
     }
@@ -102,7 +109,7 @@ public class Game {
     public boolean proceedWhenCorrectlyAnswered_andDetermineIfWeShouldKeepOnPlaying() {
         boolean keepOnPlaying = true;
 
-        if (inPenaltyBox[currentPlayer] && !isGettingOutOfPenaltyBox) {
+        if (isCurrentPlayerInPenaltyBox() && !isGettingOutOfPenaltyBox) {
             switchToNextPlayer();
         } else {
             givePlayerMoney();
