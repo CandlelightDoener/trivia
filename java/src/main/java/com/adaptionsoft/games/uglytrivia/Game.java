@@ -1,7 +1,5 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import java.util.LinkedList;
-
 public class Game {
 
     final Players players = new Players();
@@ -46,7 +44,8 @@ public class Game {
         if (players.isCurrentPlayerInPenaltyBox()) {
             players.switchToNextPlayer();
         } else {
-            givePlayerMoney();
+            System.out.println("Answer was correct!!!!");
+            players.payCurrentPlayer();
             keepOnPlaying = players.playerHasNotEnoughCoinsYet();
             players.switchToNextPlayer();
         }
@@ -54,8 +53,4 @@ public class Game {
         return keepOnPlaying;
     }
 
-    private void givePlayerMoney() {
-        System.out.println("Answer was correct!!!!");
-        players.payCurrentPlayer();
-    }
 }
