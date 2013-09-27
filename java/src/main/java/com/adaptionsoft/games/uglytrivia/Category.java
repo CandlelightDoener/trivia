@@ -12,12 +12,13 @@ public enum Category {
         this.categoryName = categoryName;
     }
 
-    public String getCategoryName() {
-        return categoryName;
-    }
-
     public static Category getCategory(int field) {
         int noOfCategories = Category.values().length;
         return Category.values()[field % noOfCategories];
+    }
+
+    @Override
+    public String toString() {
+        return categoryName;
     }
 }

@@ -1,9 +1,16 @@
 package com.adaptionsoft.games.uglytrivia;
 
+/**
+ * Things which still feel odd:
+ * + all these calls to Player in Players. This happened when removing trainwrecks in the Game class.
+ * + the flow in roll(int)
+ * + proceedWhenCorrectlyAnswered_andDetermineIfWeShouldKeepOnPlaying
+ * + Where does MAX_PLACES belong: really into player? Shouldn't it be part of some "board" or sth.?
+ */
 public class Game {
 
     final Players players = new Players();
-    final Questions questions = new Questions();
+    final CardDeck cardDeck = new CardDeck();
 
     public void add(String playerName) {
         players.add(new Player(playerName));
@@ -23,7 +30,7 @@ public class Game {
         }
 
         players.moveCurrentPlayerBy(diceEyes);
-        questions.ask(players.getCurrentPlayerCategory());
+        cardDeck.drawCard(players.getCurrentPlayerCategory());
     }
 
     private boolean isEven(int diceEyes) {
@@ -44,11 +51,10 @@ public class Game {
 
         if (!players.isCurrentPlayerInPenaltyBox()) {
             players.payCurrentPlayer();
-            keepOnPlaying = players.playerHasNotEnoughCoinsYet();
+            keepOnPlaying = players.currentPlayerHasNotEnoughCoinsYet();
         }
 
         players.switchToNextPlayer();
         return keepOnPlaying;
     }
-
 }

@@ -6,12 +6,8 @@ public class Players {
     public static final int COINS_TO_WIN = 6;
     private static final int MAX_PLAYERS = 6;
 
-    private int currentPlayer;
-
     private ArrayList<Player> players = new ArrayList<Player>();
-
-    public Players() {
-    }
+    private int currentPlayer;
 
     public void add(Player player) {
         if(players.size() >= MAX_PLAYERS)
@@ -52,7 +48,7 @@ public class Players {
         System.out.println(getCurrentPlayerName()
                 + "'s new location is "
                 + getCurrentPlayerLocation());
-        System.out.println("The category is " + Category.getCategory(getCurrentPlayerLocation()).getCategoryName());
+        System.out.println("The category is " + Category.getCategory(getCurrentPlayerLocation()));
     }
 
     public int getCurrentPlayerLocation() {
@@ -61,6 +57,10 @@ public class Players {
 
     public Category getCurrentPlayerCategory() {
         return Category.getCategory(getCurrentPlayerLocation());
+    }
+
+    boolean currentPlayerHasNotEnoughCoinsYet() {
+        return getCurrentPlayerCoins() != COINS_TO_WIN;
     }
 
     public void payCurrentPlayer() {
@@ -73,9 +73,5 @@ public class Players {
 
     public int getCurrentPlayerCoins() {
         return players.get(currentPlayer).getCoins();
-    }
-
-    boolean playerHasNotEnoughCoinsYet() {
-        return getCurrentPlayerCoins() != COINS_TO_WIN;
     }
 }
