@@ -7,7 +7,7 @@ public class Players {
 
     private int currentPlayer;
 
-    ArrayList<Player> players = new ArrayList<Player>();
+    private ArrayList<Player> players = new ArrayList<Player>();
 
     public Players() {
     }
@@ -18,14 +18,16 @@ public class Players {
 
         players.add(player);
 
-        System.out.println(player + " was added");
+        System.out.println(player.getName() + " was added");
         System.out.println("They are player number " + players.size());
     }
 
+    @Deprecated
     public Player get(int currentPlayer) {
         return players.get(currentPlayer);
     }
 
+    @Deprecated
     public int size() {
         return players.size();
     }
@@ -35,7 +37,45 @@ public class Players {
         currentPlayer %= players.size();
     }
 
+    @Deprecated
     public Player getCurrentPlayer() {
         return players.get(currentPlayer);
+    }
+
+
+    public String getCurrentPlayerName() {
+        return players.get(currentPlayer).getName();
+    }
+
+    public void removeCurrentPlayerFromPenaltyBox(boolean shouldBeRemoved) {
+        players.get(currentPlayer).removeFromPenaltyBox(shouldBeRemoved);
+    }
+
+    public boolean isCurrentPlayerInPenaltyBox() {
+        return players.get(currentPlayer).isInPenaltyBox();
+    }
+
+    public void sendCurrentPlayerToPenaltyBox() {
+        players.get(currentPlayer).sendToPenaltyBox();
+    }
+
+    public void moveCurrentPlayerBy(int diceEyes) {
+        players.get(currentPlayer).moveBy(diceEyes);
+    }
+
+    public int getCurrentPlayerLocation() {
+        return players.get(currentPlayer).getLocation();
+    }
+
+    public String getCurrentPlayerCategory() {
+        return players.get(currentPlayer).getCategory();
+    }
+
+    public void payCurrentPlayer() {
+        players.get(currentPlayer).addCoin();
+    }
+
+    public int getCurrentPlayerCoins() {
+        return players.get(currentPlayer).getCoins();
     }
 }

@@ -12,11 +12,6 @@ public class Player {
         this.playerName = playerName;
     }
 
-    @Override
-    public String toString() {
-        return playerName;
-    }
-
     public boolean isInPenaltyBox() {
         return inPenaltyBox;
     }
@@ -64,4 +59,8 @@ public class Player {
         if (places == 6) return "Sports";
         if (places == 10) return "Sports";
         return "Rock";    }
+
+    public String getName() {
+        return playerName;
+    }
 }
