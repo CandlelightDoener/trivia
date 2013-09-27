@@ -18,7 +18,6 @@ public class Game {
     LinkedList<String> rockQuestions = new LinkedList<String>();
 
     int currentPlayer = 0;
-    boolean isGettingOutOfPenaltyBox;
 
     public Game() {
         for (int i = 0; i < NO_OF_QUESTIONS_FOR_EACH_CATEGORY; i++) {
@@ -40,12 +39,10 @@ public class Game {
         if (isCurrentPlayerInPenaltyBox()) {
             if (diceEyes % 2 != 0) {
                 players.get(currentPlayer).removeFromPenaltyBox(true);
-                isGettingOutOfPenaltyBox = true;
                 move(diceEyes);
                 askQuestion();
             } else {
                 players.get(currentPlayer).removeFromPenaltyBox(false);
-                isGettingOutOfPenaltyBox = false;
             }
         } else {
             move(diceEyes);
@@ -107,7 +104,7 @@ public class Game {
     public boolean proceedWhenCorrectlyAnswered_andDetermineIfWeShouldKeepOnPlaying() {
         boolean keepOnPlaying = true;
 
-        if (isCurrentPlayerInPenaltyBox() && !isGettingOutOfPenaltyBox) {
+        if (isCurrentPlayerInPenaltyBox()) {
             switchToNextPlayer();
         } else {
             givePlayerMoney();
