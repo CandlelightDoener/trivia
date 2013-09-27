@@ -95,13 +95,12 @@ public class Game {
         return "Rock";
     }
 
-    public boolean proceedWhenWrongAnswer() {
+    public void proceedWhenWrongAnswer() {
         System.out.println("Question was incorrectly answered");
         System.out.println(players.get(currentPlayer) + " was sent to the penalty box");
         inPenaltyBox[currentPlayer] = true;
 
         switchToNextPlayer();
-        return true;
     }
 
     public boolean proceedWhenCorrectlyAnswered_andDetermineIfWeShouldKeepOnPlaying() {

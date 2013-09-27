@@ -32,7 +32,8 @@ public class GameRunner {
                 aGame.roll(rand.nextInt(5) + 1);
 
                 if (rand.nextInt(9) == 7) {
-                    notAWinnerYet = aGame.proceedWhenWrongAnswer();
+                    aGame.proceedWhenWrongAnswer();
+                    notAWinnerYet = true;
                 } else {
                     notAWinnerYet = aGame.proceedWhenCorrectlyAnswered_andDetermineIfWeShouldKeepOnPlaying();
                 }
