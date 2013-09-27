@@ -9,13 +9,13 @@ public class Players {
     private ArrayList<Player> players = new ArrayList<Player>();
     private int currentPlayer;
 
-    public void add(Player player) {
+    public void addNewPlayer(String playerName) {
         if (players.size() >= MAX_PLAYERS)
             throw new RuntimeException("Can't add player - maximum number of players already reached");
 
-        players.add(player);
+        players.add(new Player(playerName));
 
-        System.out.println(player.getName() + " was added");
+        System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
     }
 
@@ -76,5 +76,51 @@ public class Players {
 
     public int getCurrentPlayerCoins() {
         return players.get(currentPlayer).getCoins();
+    }
+
+    private class Player {
+        private static final int MAX_PLACES = 12;
+
+        private final String playerName;
+        private boolean inPenaltyBox;
+        private int coins;
+        private int locationOnPlayingField;
+
+        public Player(String playerName) {
+            this.playerName = playerName;
+        }
+
+        public String getName() {
+            return playerName;
+        }
+
+        public void sendToPenaltyBox() {
+            inPenaltyBox = true;
+        }
+
+        public void removeFromPenaltyBox() {
+            inPenaltyBox = false;
+        }
+
+        public boolean isInPenaltyBox() {
+            return inPenaltyBox;
+        }
+
+        public void pay() {
+            coins++;
+        }
+
+        public int getCoins() {
+            return coins;
+        }
+
+        public void moveBy(int diceEyes) {
+            locationOnPlayingField += diceEyes;
+            locationOnPlayingField %= MAX_PLACES;
+        }
+
+        public int getLocationOnPlayingField() {
+            return locationOnPlayingField;
+        }
     }
 }

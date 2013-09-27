@@ -15,7 +15,7 @@ public class Game {
     final CardDeck cardDeck = new CardDeck();
 
     public void add(String playerName) {
-        players.add(new Player(playerName));
+        players.addNewPlayer(playerName);
     }
 
     public void roll(int diceEyes) {
