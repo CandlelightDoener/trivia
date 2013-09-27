@@ -9,7 +9,7 @@ public class Game {
     public static final int MAX_PLACES = 12;
     public static final int COINS_TO_WIN = 6;
 
-    ArrayList<String> players = new ArrayList<String>();
+    ArrayList<Player> players = new ArrayList<Player>();
     int[] places = new int[MAX_PLAYERS];
     int[] purses = new int[MAX_PLAYERS];
     boolean[] inPenaltyBox = new boolean[MAX_PLAYERS];
@@ -32,7 +32,7 @@ public class Game {
     }
 
     public boolean add(String playerName) {
-        players.add(playerName);
+        players.add(new Player(playerName));
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
@@ -61,8 +61,8 @@ public class Game {
     }
 
     private void move(int diceEyes) {
-        places[currentPlayer] = places[currentPlayer] + diceEyes;
-        if (places[currentPlayer] >= MAX_PLACES) places[currentPlayer] = places[currentPlayer] - MAX_PLACES;
+        places[currentPlayer] += diceEyes;
+        places[currentPlayer] %= MAX_PLACES;
 
         System.out.println(players.get(currentPlayer)
                 + "'s new location is "
