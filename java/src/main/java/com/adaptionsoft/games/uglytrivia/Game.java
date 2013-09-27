@@ -1,5 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import com.adaptionsoft.games.uglytrivia.players.Players;
+
 /**
  * Things which still feel odd:
  * + all these calls to Player in Players. This happened when removing trainwrecks in the Game class.
