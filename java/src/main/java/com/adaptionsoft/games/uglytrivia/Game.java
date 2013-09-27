@@ -23,15 +23,11 @@ public class Game {
         }
 
         players.moveCurrentPlayerBy(diceEyes);
-        askQuestion();
+        questions.ask(players.getCurrentPlayerCategory());
     }
 
     private boolean isEven(int diceEyes) {
         return diceEyes % 2 == 0;
-    }
-
-    private void askQuestion() {
-        questions.ask(players.getCurrentPlayerCategory());
     }
 
     public void proceedWhenWrongAnswer() {
