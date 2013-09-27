@@ -39,12 +39,13 @@ public class Game {
     }
 
     public boolean proceedWhenCorrectlyAnswered_andDetermineIfWeShouldKeepOnPlaying() {
+        System.out.println("Answer was correct!!!!");
+
         boolean keepOnPlaying = true;
 
         if (players.isCurrentPlayerInPenaltyBox()) {
             players.switchToNextPlayer();
         } else {
-            System.out.println("Answer was correct!!!!");
             players.payCurrentPlayer();
             keepOnPlaying = players.playerHasNotEnoughCoinsYet();
             players.switchToNextPlayer();
